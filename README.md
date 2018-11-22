@@ -5,7 +5,7 @@ fallback mode by triggering the fallback with a Maybe.error().
 
 Originally reported at https://github.com/micronaut-projects/micronaut-core/issues/952
 
-For JProfiler graphs showing the leak
+For JProfiler graphs showing the leak are in the above ticket.
 
 # Setup
 
