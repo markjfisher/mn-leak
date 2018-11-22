@@ -1,5 +1,14 @@
 # micronaut leak example
 
+This repo is to demonstrate a memory leak issue when running a service in
+fallback mode by triggering the fallback with a Maybe.error().
+
+Originally reported at https://github.com/micronaut-projects/micronaut-core/issues/952
+
+For JProfiler graphs showing the leak
+
+# Setup
+
 Ensure you have a consul instance running
 
     docker run -p 8500:8500 consul
@@ -8,17 +17,18 @@ Run the application:
 
     ./gradlew :app:run
 
-Run an apache bench test:
+Run apache bench test with the following:
 
     $ ab -r -c 350 -n 20000 http://127.0.0.1:8080/v0/product/12345
 
 
-You will see increasing request times, and with JProfiler attached, an increased number
-of objects created.
+With multiple runs of the above, increasing response times were observed, and with JProfiler attached, an
+increased number of objects created directly correlating to the number of requests performed.
 
 # Testing non-fallback
 
-Comment out the "@Fallback" in StaticProductCatalogueService, and enable it in DefaultProductCatalogueService so that the Static service is called as the primary service, and rerun the above apache bench tests.
+Comment out the "@Fallback" in StaticProductCatalogueService, and enable it in DefaultProductCatalogueService
+so that the Static service is called as the primary service, and rerun the above apache bench tests.
 
 # Results
 
