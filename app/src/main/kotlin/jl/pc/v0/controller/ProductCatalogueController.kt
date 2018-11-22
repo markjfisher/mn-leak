@@ -3,7 +3,6 @@ package jl.pc.v0.controller
 import io.micronaut.http.annotation.Controller
 import io.micronaut.validation.Validated
 import io.reactivex.Maybe
-import io.reactivex.Single
 import jl.pc.api.v0.Product
 import jl.pc.api.v0.ProductOperations
 import jl.pc.v0.Configuration

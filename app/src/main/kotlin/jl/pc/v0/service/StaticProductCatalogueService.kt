@@ -4,7 +4,6 @@ import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import io.micronaut.retry.annotation.Fallback
 import io.reactivex.Maybe
-import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import jl.pc.api.v0.Product
 import jl.pc.v0.Configuration
