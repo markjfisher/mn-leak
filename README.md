@@ -1,4 +1,4 @@
-# micornaut leak example
+# micronaut leak example
 
 Ensure you have a consul instance running
 
