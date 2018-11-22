@@ -1,0 +1,47 @@
+plugins {
+	id "io.spring.dependency-management" version "1.0.6.RELEASE"
+	id "org.jetbrains.kotlin.jvm" version "1.2.61"
+	id "org.jetbrains.kotlin.kapt" version "1.2.61"
+}
+
+version "0.1"
+group "jl.pc"
+
+apply plugin: 'kotlin'
+
+defaultTasks 'clean', 'build'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}"
+    compile "org.jetbrains.kotlin:kotlin-reflect:${kotlinVersion}"
+    compile "io.micronaut:micronaut-runtime:${projectVersion}"
+    compile "io.micronaut:micronaut-validation:${projectVersion}"
+}
+
+repositories {
+	mavenLocal()
+	mavenCentral()
+	maven { url "https://jcenter.bintray.com" }
+}
+
+dependencyManagement {
+	imports {
+		mavenBom 'io.micronaut:micronaut-bom:1.0.1'
+	}
+}
+
+compileKotlin {
+	kotlinOptions {
+	    jvmTarget = '1.8' 
+	    //Will retain parameter names for Java reflection
+	    javaParameters = true 
+	}
+}
+
+compileTestKotlin {
+	kotlinOptions {
+	    jvmTarget = '1.8' 
+	    javaParameters = true 
+	}
+}
+

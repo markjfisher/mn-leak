@@ -1,0 +1,55 @@
+product-catalogue:
+  controller-client-timeout: 950
+  latency-testing: true
+---
+micronaut:
+  application:
+    name: pc-service
+  server:
+    maxRequestSize: 1MB
+    host: localhost
+    netty:
+      maxHeaderSize: 500KB
+      worker:
+        threads: 1
+      parent:
+        threads: 1
+      childOptions:
+        autoRead: true
+---
+micronaut:
+  router:
+    static-resources:
+      swagger:
+        paths: classpath:META-INF/swagger
+        mapping: /swagger/**
+      swagger-ui:
+        paths: classpath:META-INF/swagger-ui
+        mapping: /swagger-ui/**
+      redoc:
+        paths: classpath:META-INF/redoc
+        mapping: /redoc/**
+---
+micronaut:
+  metrics:
+    enabled: true
+    export:
+      prometheus:
+        enabled: true
+        step: PT1M
+        descriptions: true
+---
+hystrix:
+  stream:
+    enabled: false
+---
+consul:
+  client:
+    registration:
+      enabled: true
+    defaultZone: "${CONSUL_HOST:localhost}:${CONSUL_PORT:8500}"
+---
+endpoints:
+  info:
+    enabled: true
+    sensitive: false
